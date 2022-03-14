@@ -20,7 +20,7 @@ fetchRadioStations = () => {
         document.querySelector('.stations').innerHTML += station;
     })*/
 }
-componentDidMount(){
+componentDidMount(); {
     this.fetchRadioStations();
 }
 /*.catch(err => {
