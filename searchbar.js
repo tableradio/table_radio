@@ -19,10 +19,10 @@ fetchRadioStations = () => {
         const station = '<li><img src="${poster}" <h2>${name}</h2><li>'
         document.querySelector('.stations').innerHTML += station;
     })*/
-}
-componentDidMount(); {
+
+componentDidMount() {
     this.fetchRadioStations();
-}
+} }
 /*.catch(err => {
 	console.error(err); 
 });*/
