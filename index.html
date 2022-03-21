@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+<html lang ="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0>">
     <title>Table Radio</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
@@ -7,12 +10,13 @@
     <h1>Welcome to Group 3's Capstone Project</h1>
     <h2>Sign up for a free account today!</h2>
     <img src="img/dancing_people.jpg">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0>">
     <script defer src="login.css"></script>
     <script defer src="login.js"></script>
     <main id="main-holder>">
         <h1 id="login-header"></h1>
+        <div id="login-error-msg-holder">
+            <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
+        </div>
         <form id="login-form">
             <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
             <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
