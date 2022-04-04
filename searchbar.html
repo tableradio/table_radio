@@ -9,8 +9,9 @@
     <body>
         <script src="searchbar.js"></script>
         <div class="container-fluid stations">
-            <input type="text" placeholder="Search"/>
-            <div class="row">
+            <input type="text" onkeypress="search_stations(this.value)" placeholder="Search"/> 
+            <div id="rdcontent">
+<!--            <div class="row">
                 <div class="col-4">name: </div>
                 <div class="col-8" id="station_name">value</div>
             </div> 
@@ -25,8 +26,9 @@
             <div class="row">
                 <div class="col-4">country: </div>
                 <div class="col-8" id="station_country">value</div>
-            </div> 
+            </div> -->
         </div>
+    </div>
     </body>
 </html>
 <!-- use SVGS to make the styling easier?

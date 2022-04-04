@@ -1,5 +1,5 @@
-fetchRadioStations();
-function fetchRadioStations() {
+fetchRadioStations("");
+function fetchRadioStations(search_string) {
     const options = {
         method: 'GET',
         headers: {
@@ -12,37 +12,66 @@ function fetchRadioStations() {
         .then(response => response.json())
         .then(response => {
             console.log(response)
+            document.getElementById("rdcontent").innerHTML = "";
             for (let i = 0; i < response.data.length; i++) { 
+                console.log(response.data.length);
                 console.log(response.data[i]);
                 var station_name = response.data[i].name;
                 var station_logo = response.data[i].logo.original;
                 var station_genres = response.data[i].genres;
                 var station_country = response.data[i].country;
                 console.log(station_name)
-                create_station(station_name, station_logo, station_genres, station_country);
+                if (search_string != ""){ //did we get anything from the parameter on line 2
+                    var sUp = search_string.toUpperCase();
+                    var gResult = false; 
+                    for (let i = 0; i < station_genres.length; i++) { 
+                        var gUp = station_genres[i].toUpperCase();
+                        gResult = gUp.indexOf(sUp) > -1;
+                        console.log(gUp.indexOf(sUp));
+                        if (gResult === true){
+                            break;
+                        }
+                    }
+                    var cUp = station_country.toUpperCase();
+                    var nUp = station_name.toUpperCase();
+                    let nResult = nUp.indexOf(sUp) > -1;
+                    let cResult = cUp.indexOf(sUp) > -1;
+                    if (nResult === false && cResult === false && gResult === false) {
+                        continue;
+                    }
+                } 
+                if (selecting_stations == "" || selecting_stations == null)
+                {
+                    selecting_stations = create_station(station_name, station_logo, station_genres, station_country);
+                }
+                else {
+                    selecting_stations += create_station(station_name, station_logo, station_genres, station_country);
+                }
+                document.getElementById("rdcontent").innerHTML=selecting_stations; 
             }
         })
         .catch(err => console.error(err));}
 
         function create_station(station_name, station_logo, station_genres, station_country){
             console.log("got here")
-            document.getElementById("station_name").textContent=station_name;
-            document.getElementById("station_logo").innerHTML="<img src='"+ station_logo + "'/>"; //image tag, src is link for image
-            var text;
+            var stations;
             for (let i = 0; i < station_genres.length; i++) { 
-                if (text == "" || text == null)
+                if (stations == "" || stations == null)
                 {
-                    text = station_genres[i];
+                    stations = station_genres[i];
                 }
                 else {
-                    text += ", " + station_genres[i];
+                    stations += ", " + station_genres[i];
                 }
             }
-            document.getElementById("station_genre").textContent=text;
-            document.getElementById("station_country").textContent=station_country;
+            var contenttemplate = "<div class='row'><div class='col-4'>name: </div><div class='col-8'>" + station_name + "</div></div>"
+            contenttemplate = contenttemplate + "<div class='row'><div class='col-4'>logo: </div><div class='col-8'><img src='" + station_logo + "' alt='" + station_name + "'/> </div></div>"
+            contenttemplate = contenttemplate + "<div class='row'><div class='col-4'>genre: </div><div class='col-8'>" + stations + "</div></div>"
+            contenttemplate = contenttemplate + "<div class='row'><div class='col-4'>country: </div><div class='col-8'>" + station_country + "</div></div>"
+            return contenttemplate; 
+    }   
+    function search_stations(search_string){
+        if (search_string.length > 3 || search_string.length == 0){
+            fetchRadioStations(search_string);
         }
-"<div class='row'><div class='col-4'>name: </div><div class='col-8' id='station_name'>value</div></div> "
-"<div class='row'><div class='col-4'>logo: </div><div class='col-8' id='station_logo'>value</div></div>"
-"<div class='row'><div class='col-4'>genre: </div><div class='col-8' id='station_genre'>value</div></div>"
-"<div class='row'><div class='col-4'>country: </div><div class='col-8' id='station_country'>value</div></div>" 
-//make 4 straight lines, single quotes
+    }
