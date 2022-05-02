@@ -8,8 +8,9 @@ loginButton.addEventListener("click", (e) => {
     const password = loginForm.password.value;
 
     if (username === "capstonegroup3" && password === "tableradio") {
-        alert("You have successfully logged in.");
-        location.reload();
+        window.location.href="stream_index.html";
+        //alert("You have successfully logged in.");
+        //location.reload();
     } else {
         loginErrorMsg.style.opacity = 1;
     }
