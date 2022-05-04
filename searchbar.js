@@ -5,14 +5,15 @@ async function fetchRadioStations(search_string) {
         method: 'GET',
         headers: {
             'X-RapidAPI-Host': '50k-radio-stations.p.rapidapi.com',
-            'X-RapidAPI-Key': '12243b1d97mshde8e8d53591ba1fp1c3c6ejsn59205afc2c46'
+            'X-RapidAPI-Key': '8d7744bc47msh98068db7cba6297p192f1bjsn16d9dac90017'
         }
     };
     var selecting_stations;
     var page_count = 5;
+
     for (var i = 1; i < page_count; i++) {
-        var pageurl = 'https://50k-radio-stations.p.rapidapi.com/get/channels?country_id=5&page=' + i;
-        console.log(pageurl);
+        var pageurl =  "https://50k-radio-stations.p.rapidapi.com/get/channels?country_id=5&page=" + i;
+        
         await fetch(pageurl, options)
             .then(response => response.json())
             .then(response => {
@@ -20,7 +21,9 @@ async function fetchRadioStations(search_string) {
                     // if (response.has_next === false){
                     //     page_count = i;
                     // }
-                document.getElementById("rdcontent").innerHTML = "";
+
+                
+                // document.getElementById("rdcontent").innerHTML = "";
                 for (let i = 0; i < response.data.length; i++) {
                     console.log(response.data.length);
                     console.log(response.data[i]);
@@ -53,6 +56,7 @@ async function fetchRadioStations(search_string) {
                     } else {
                         selecting_stations += create_station(station_name, station_logo, station_genres, station_country);
                     }
+                    
                     document.getElementById("rdcontent").innerHTML = selecting_stations;
                 }
             })

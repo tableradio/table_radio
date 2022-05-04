@@ -8,6 +8,13 @@ body {
     font-size: 1.5rem;
 }
 
+.station_logo {
+    max-width: 50%;
+    max-height: 200px;
+    object-fit: scale-down;
+    overflow: hidden;
+}
+
 .play,
 .pause {
     width: 100px;

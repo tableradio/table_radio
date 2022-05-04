@@ -84,9 +84,10 @@ return arr;
 
 async function getData(){
   var response = await fetch('http://ssh.noglider.com:8088/user1.csv');
+  //var response = await fetch('http://ssh.noglider.com:8081/user1.csv');
   var data = await response.text();
   //console.log(typeof(data));
-  console.log(data);
+  //console.log(data);
   var final = csvToArray(data);
   for (let i = 0; i< (final.length)-1; i++) {
     addstream(final[i].Name, final[i].Url,i);
@@ -103,10 +104,13 @@ function changestream(num,name,url){
 */
 
 function changestream(){
+  info = document.getElementById("personlist").value.split(",")
   playername = "player" + String(document.getElementById("myInput1").value);
   radioname = "radio" + String(document.getElementById("myInput1").value);
-  document.getElementById(radioname).firstChild.data = String(document.getElementById("myInput2").value);
-  document.getElementById(playername).src = String(document.getElementById("myInput3").value);
+  //document.getElementById(radioname).firstChild.data = String(document.getElementById("myInput2").value);
+  //document.getElementById(playername).src = String(document.getElementById("myInput3").value);
+  document.getElementById(radioname).firstChild.data = String(info[0]);
+  document.getElementById(playername).src = String(info[1]);
 }
 
 function save(){
@@ -120,7 +124,21 @@ function save(){
   console.log(s);
 }
 
+async function pop_options(){
+  var response = await fetch('http://ssh.noglider.com:8088/stations2.csv');
+  var data = await response.text();
+  var rows = data.split("\n").filter(function (del) {return del.length != 0 });
+  rows.sort();
+  //console.log(rows);
+  for (let i = 0; i < rows.length; i++){
+    var info = rows[i].split(",")
+    var a = new Option;
+    a.innerHTML = String(info[0]);
+    a.value = String(rows[i]);
+    document.getElementById('personlist').options.add(a);
+  }
+}
+
 getData();
-
-
+pop_options();
 //document.getElementsByClassName("streamplayer").length;

@@ -5,13 +5,15 @@
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
 <title>Home</title>
 <link rel="stylesheet" type="text/css" href="css/searchbar.css">
-<script src="js/custom.js"></script>
+<script src="custom.js"></script>
 </head>
 <body>
 <div id="inputs" class="info">
-<input type="number" placeholder="Radio Number" id="myInput1" min="0" max = "7">
-<input type="text" placeholder="Station Name" id="myInput2">
-<input type="text" placeholder="Station Url" id="myInput3">
+<input type="number" placeholder="Radio Number 0-7" id="myInput1" min="0" max = "7">
+<!--<input type="text" placeholder="Station Name" id="myInput2">
+<input type="text" placeholder="Station Url" id="myInput3">-->
+<select name="list" id="personlist">
+</select>
 <button onclick="changestream()" type="button">Change</button></div>
 
 <button onclick = "save()" type="button">Save</button>
